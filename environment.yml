@@ -1,0 +1,13 @@
+name: cro-trilemma
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - numpy=1.24.3
+  - scipy=1.11.3
+  - pandas=2.1.1
+  - matplotlib=3.7.2
+  - pip
+  - pip:
+    - -r requirements.txt
