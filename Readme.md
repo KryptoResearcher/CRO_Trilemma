@@ -4,7 +4,7 @@
 
 This repository provides the complete implementation and reproducibility framework for the paper:
 
-**"The CRO Trilemma:A Formal Incompatibility between Confidentiality, Reliability, and legal Opposability in Post-Quantum Proof Systems."**
+**"The CRO Trilemma: A Formal Incompatibility between Confidentiality, Reliability, and legal Opposability in Post-Quantum Proof Systems"**
 
 The CRO Trilemma establishes a fundamental impossibility result: no cryptographic protocol can simultaneously achieve optimal confidentiality (privacy), reliability (robustness), and opposability (legal interpretability) when operating in contexts of growing complexity.
 
@@ -15,52 +15,60 @@ We prove that for any protocol $\mathcal{P}$:
 $$\mathrm{Priv}(\mathcal{P}) \cdot \mathrm{Rel}(\mathcal{P}) \cdot \frac{H_{\mathsf{Opp}}(\mathcal{P}, \mathcal{C})}{\log |\mathcal{V}_{\mathcal{J}}|} \leq \frac{1}{2^{H(\mathcal{C})}} + \eta_q(\mathcal{C}) + \mathsf{negl}(\lambda)$$
 
 ##  Repository Structure
+
+```
 cro-trilemma-reproducibility/
-├── README.md
-├── requirements.txt
-├── environment.yml
-├── setup.py
-├── Makefile
-├── .gitignore
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── results/
-├── src/
-│   ├── __init__.py
-│   ├── core/
-│   │   ├── __init__.py
-│   │   ├── metrics.py
-│   │   ├── protocols.py
-│   │   └── quantum.py
-│   ├── measurements/
-│   │   ├── __init__.py
+│
+├──  Core Files
+│   ├── README.md                # This file
+│   ├── requirements.txt         # Python dependencies
+│   ├── environment.yml          # Conda environment
+│   ├── setup.py                # Package installation
+│   ├── Makefile                # Automation commands
+│   └── .gitignore              # Git ignore rules
+│
+├──  data/                    # Experimental data
+│   ├── raw/                    # Original measurements
+│   ├── processed/              # Processed datasets
+│   └── results/                # Final results & figures
+│
+├──  src/                     # Source code
+│   ├── core/                   # Core CRO functionality
+│   │   ├── metrics.py          # CRO metrics calculation
+│   │   ├── protocols.py        # Protocol implementations
+│   │   └── quantum.py          # Quantum channel models
+│   │
+│   ├── measurements/           # Empirical measurements
 │   │   ├── measure_confidentiality.py
 │   │   ├── measure_reliability.py
 │   │   └── measure_opposability.py
-│   ├── analysis/
-│   │   ├── __init__.py
+│   │
+│   ├── analysis/               # Statistical analysis
 │   │   ├── statistical_analysis.py
 │   │   ├── visualization.py
 │   │   └── validation.py
-│   └── utils/
-│       ├── __init__.py
-│       ├── crypto_wrappers.py
-│       └── helpers.py
-├── scripts/
-│   ├── run_all_experiments.py
-│   ├── generate_tables.py
-│   └── create_figures.py
-├── notebooks/
+│   │
+│   └── utils/                  # Utilities
+│       ├── crypto_wrappers.py  # Crypto library interfaces
+│       └── helpers.py          # Helper functions
+│
+├──  scripts/                 # Execution scripts
+│   ├── run_all_experiments.py  # Main experiment runner
+│   ├── generate_tables.py      # LaTeX table generation
+│   └── create_figures.py       # Figure generation
+│
+├──  notebooks/               # Jupyter notebooks
 │   ├── 01_theoretical_bounds.ipynb
 │   ├── 02_empirical_measurements.ipynb
 │   └── 03_validation.ipynb
-└── tests/
+│
+└──  tests/                   # Unit tests
     ├── test_metrics.py
     ├── test_protocols.py
     └── test_analysis.py
 
-  ## File Descriptions
+
+##  File Descriptions
 
 ### Core Modules (`src/core/`)
 
@@ -105,9 +113,9 @@ cro-trilemma-reproducibility/
 ### Installation
 
 #### Option 1: Using Conda (Recommended)
-bash
+```bash
 # Clone repository
-git clone https://github.com/KryptoResearcher/cro-trilemma.git
+git clone https://github.com/kryptoresearcher/cro-trilemma.git
 cd cro-trilemma
 
 # Create environment
@@ -116,6 +124,10 @@ conda activate cro-trilemma
 
 # Install package
 pip install -e .
+```
+
+#### Option 2: Using pip
+```bash
 # Create virtual environment
 python -m venv venv
 source venv/bin/activate  # Windows: venv\Scripts\activate
@@ -123,28 +135,30 @@ source venv/bin/activate  # Windows: venv\Scripts\activate
 # Install dependencies
 pip install -r requirements.txt
 pip install -e .
+```
 
-Running Experiments
-Complete Reproduction (All Results)
-bash
+### Running Experiments
 
+#### Complete Reproduction (All Results)
+```bash
 make reproduce
+```
 
 This command will:
-    Clean previous results
-    Run all protocol measurements
-    Perform statistical analysis
-    Generate all tables and figures
-    Validate results against theoretical bounds
+1. Clean previous results
+2. Run all protocol measurements
+3. Perform statistical analysis
+4. Generate all tables and figures
+5. Validate results against theoretical bounds
 
-Individual Components
-bash
-
+#### Individual Components
+```bash
 # Run measurements only
 python scripts/run_all_experiments.py --trials 1000
 
 # Generate tables only
 python scripts/generate_tables.py
+
 
 # Generate figures only
 python scripts/create_figures.py
@@ -154,6 +168,7 @@ python -m src.measurements.measure_confidentiality --protocol groth16
 
 # Run validation suite
 python -m src.analysis.validation
+```
 
 ##  Key Results
 
@@ -205,8 +220,9 @@ Criminal law contexts require highest semantic preservation, reducing interpreta
 ### Theoretical Bounds
 
 The trilemma bound is calculated as:
-python
+```python
 bound = 1/(2^H(C)) + η_q(C) + negl(λ)
+```
 
 Where:
 - H(C): Contextual entropy
@@ -216,17 +232,18 @@ Where:
 ##  Testing
 
 Run the complete test suite:
-bash
+```bash
 pytest tests/ -v --cov=src
-
+```
 
 Individual test modules:
-bash
+```bash
 pytest tests/test_metrics.py -v      # Test metric calculations
 pytest tests/test_protocols.py -v    # Test protocol implementations
 pytest tests/test_analysis.py -v     # Test statistical analysis
+```
 
-## Visualization
+##  Visualization
 
 The suite generates several publication-quality figures:
 
@@ -246,13 +263,13 @@ The suite generates several publication-quality figures:
    - Pairwise CRO dimension relationships
    - Theoretical vs empirical bounds
 
-##  Advanced Usage
+## Advanced Usage
 
 ### Custom Protocol Addition
 
 Add a new protocol by extending the base class:
 
-python
+```python
 from src.core.protocols import Protocol, ProtocolParams
 
 class MyProtocol(Protocol):
@@ -267,12 +284,13 @@ class MyProtocol(Protocol):
     def verify(self, message, signature, public_key):
         # Implementation
         pass
+```
 
 ### Custom Context Definition
 
 Define new legal contexts:
 
-python
+```python
 from src.core.metrics import ContextualEntropy
 
 ce = ContextualEntropy()
@@ -281,13 +299,13 @@ h_c = ce.calculate(
     temporal_constraints=512,   # Temporal conditions
     procedural_constraints=256  # Procedural rules
 )
-
+```
 
 ### Quantum Channel Analysis
 
 Analyze custom quantum channels:
 
-python
+```python
 from src.core.quantum import QuantumChannel, QuantumState
 import numpy as np
 
@@ -301,9 +319,9 @@ class MyChannel(QuantumChannel):
 state = QuantumState(density_matrix, dimension=2)
 new_state = channel.apply(state)
 loss = semantic_distance(state, new_state)
+```
 
-
-## Mathematical Background
+##  Mathematical Background
 
 ### The CRO Trilemma
 
@@ -322,27 +340,27 @@ This impossibility arises from:
 - **Reliability**: $\mathrm{Rel}(\mathcal{P}) = \min_{\mathcal{C}} \Pr[\mathsf{Verify}(\sigma, \mathcal{C}) = 1]$
 - **Opposability**: $H_{\mathsf{Opp}}(\mathcal{P}, \mathcal{C}) = H_\infty(V | \Sigma, \mathcal{C})$
 
-## Troubleshooting
+##  Troubleshooting
 
 ### Common Issues
 
 1. **Import Errors**
-   bash
+   ```bash
    # Ensure package is installed in development mode
    pip install -e .
-   
+   ```
 
 2. **Memory Issues**
-   bash
+   ```bash
    # Reduce number of trials
    python scripts/run_all_experiments.py --trials 100
-   
+   ```
 
 3. **Missing Dependencies**
-   bash
+   ```bash
    # Install all requirements
    pip install -r requirements.txt
-   
+   ```
 
 ### Performance Optimization
 
@@ -355,19 +373,18 @@ For faster execution:
 
 If you use this code in your research, please cite:
 
-bibtex
-@article{cro-trilemma-2024,
-  title={The CRO Trilemma: A Formal Incompatibility between Confidentiality,
-Reliability, and legal Opposability in Post-Quantum Proof Systems.},
-  author={[Authors]}, (anonymized for doubleblind review process according to Q1 standards)
+```bibtex
+@article{cro-trilemma-2025,
+  title={The CRO Trilemma:A Formal Incompatibility between Confidentiality, Reliability, and legal Opposability in Post-Quantum Proof Systems},
+  author={[Authors]}, (anonymised for doubleblind review)
   journal={[Journal]},
-  year={2024},
+  year={2025},
   doi={[DOI]},
   eprint={[arXiv ID]},
   archivePrefix={arXiv},
   primaryClass={cs.CR}
 }
-
+```
 
 ## License
 
@@ -379,7 +396,7 @@ We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guid
 
 ### Development Setup
 
-bash
+```bash
 # Install development dependencies
 pip install -e ".[dev]"
 
@@ -391,22 +408,23 @@ black src/ tests/
 
 # Type checking
 mypy src/
-
+```
 
 ##  Contact
 
-- **Lead Author**: KryptoResearcher, kryptoresearcher@proton.me (the email works, it's anonymized for doubleblind review process according to Q1 standards)
-- **Repository Issues**: [GitHub Issues](https://github.com/KryptoResearcher/cro-trilemma/issues)
-- **Discussion**: [GitHub Discussions](https://github.com/KryptoResearcher/cro-trilemma/discussions)
+- **Lead Author**: [Krypto Researcher] ([kryptoresearcher@proton.me])
+- **Repository Issues**: [GitHub Issues](https://github.com/kryptoresearcher/cro-trilemma/issues)
+- **Discussion**: [GitHub Discussions](https://github.com/kryptoresearcher/cro-trilemma/discussions)
 
-## Acknowledgments
+##  Acknowledgments
 
 We thank:
-- The cryptographic community for valuable feedback since the ePrint version is available.
+- The members the Laboratory of Mathematical Engineering and Information Systems (LIMSI)
+- The cryptographic community for valuable feedback
 - Anonymous reviewers for constructive suggestions
 - Open-source contributors to underlying libraries
 
-## Computational Requirements (like my own laptop)
+## Computational Requirements
 
 ### Hardware Requirements
 - **Minimum**: 8GB RAM, 4 CPU cores
@@ -420,15 +438,23 @@ We thank:
 - Table generation: ~1 minute
 
 ## Version History
-- **v2.0.0** (2025-08): Q1 Journal version (anonymized) 
-- **v1.0.0** (2025-07): ePrint version
-- **v0.9.0** (2025-05): ICTO version
-- **v0.1.0** (2025-01): Raw
+
+- **v2.1.0** (2025-08): Initial release with full experimental suite
+- **v2.0.0** (2025-06): ePrint version
+- **v1.0.0** (2025-01): Initial release with full experimental suite
+- **v0.9.0** (2024-12): PoC
+- **v0.1.0** (2024-10): Formalizing
 
 ## Disclaimer
 
 This implementation is for research purposes. While we strive for correctness, the code should not be used in production systems without thorough review and testing.
 
-**Last Updated**: 22/08/2025
+
+**Last Updated**: 08/2025
+
+**Status**: Complete and Validated
+```
+
+
 
 
