@@ -410,15 +410,16 @@ black src/ tests/
 mypy src/
 ```
 
-## 📮 Contact
+##  Contact
 
 - **Lead Author**: [Krypto Researcher] ([kryptoresearcher@proton.me])
 - **Repository Issues**: [GitHub Issues](https://github.com/kryptoresearcher/cro-trilemma/issues)
 - **Discussion**: [GitHub Discussions](https://github.com/kryptoresearcher/cro-trilemma/discussions)
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 We thank:
+- The members the Laboratory of Mathematical Engineering and Information Systems (LIMSI)
 - The cryptographic community for valuable feedback
 - Anonymous reviewers for constructive suggestions
 - Open-source contributors to underlying libraries
@@ -453,6 +454,7 @@ This implementation is for research purposes. While we strive for correctness, t
 
 **Status**: Complete and Validated
 ```
+
 
 
 
