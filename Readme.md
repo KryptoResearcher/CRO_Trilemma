@@ -439,8 +439,8 @@ We thank:
 
 ## Version History
 
-- **v1.0.0** (2025-08): Initial release with full experimental suite
-- **v1.0.0** (2025-06): ePrint version
+- **v2.1.0** (2025-08): Initial release with full experimental suite
+- **v2.0.0** (2025-06): ePrint version
 - **v1.0.0** (2025-01): Initial release with full experimental suite
 - **v0.9.0** (2024-12): PoC
 - **v0.1.0** (2024-10): Formalizing
@@ -454,6 +454,7 @@ This implementation is for research purposes. While we strive for correctness, t
 
 **Status**: Complete and Validated
 ```
+
 
 
 
